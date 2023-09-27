@@ -188,7 +188,8 @@ class _AdminFormState extends State<AdminForm> {
       setState(() {
         _loading = false;
       });
-      // TODO: navigate to code
+      Navigator.of(context)
+          .pushNamed("/generated");
     });
   }
 

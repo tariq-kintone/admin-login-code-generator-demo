@@ -1,3 +1,4 @@
+import 'package:admin_login_code_generator/pages/code_copy.dart';
 import 'package:admin_login_code_generator/pages/form_generator.dart';
 import 'package:admin_login_code_generator/theme.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Admin Demo',
       theme: buildTheme(colorScheme: colorScheme),
-      home: const FormGeneratorPage(),
+      routes: {
+        "/": (context) => FormGeneratorPage(),
+        "/generated": (context) => CodeCopyPage(),
+      },
     );
   }
 }
