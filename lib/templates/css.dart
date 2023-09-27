@@ -8,6 +8,13 @@ String buildCss({required Color brandColor}) {
 }
 
 const _cssTemplate ="""
+#login-card-container {
+  display: flex;
+  align-items: center;
+  height: 600px;
+  max-width: 700px;
+}
+
 #login-card {
   border-radius: 8px;
 }

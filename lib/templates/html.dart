@@ -144,7 +144,7 @@ String buildHtml(
 }
 
 const _htmlTemplate = """
-  <div class="row">
+  <div id='login-card-container' class="row">
     <div class="col s12">
       <div id="login-card" class="card darken-1">
         <div id="login-card-content" class="card-content">

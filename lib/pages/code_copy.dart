@@ -1,5 +1,5 @@
 import 'package:admin_login_code_generator/models/form_parameters.dart';
-import 'package:admin_login_code_generator/pages/code_text_field.dart';
+import 'package:admin_login_code_generator/widgets/code_text_field.dart';
 import 'package:admin_login_code_generator/templates/css.dart';
 import 'package:admin_login_code_generator/templates/html.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class CodeCopyPage extends StatelessWidget {
 const js = """
 function myFunction() {
   let text;
-  let user = prompt("Please enter your name:", "Your First Name");
+  let user = prompt("Please enter your name:", "Enter Your Email");
   if (user == null || user == "") {
     text = "User cancelled the prompt.";
   } else {
