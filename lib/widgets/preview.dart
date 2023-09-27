@@ -43,124 +43,120 @@ class AdminPreview extends StatelessWidget {
                           style: context.textTheme.titleLarge,
                         ),
                       ),
-                      if (parameters.methods.contains(
-                              AuthenticationMethod.emailAndPassword) ==
-                          true)
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 16),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: "Email",
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 16),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: "Password",
-                                ),
-                              ),
-                            ),
-                            const Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                      onPressed: null,
-                                      child: Text("LOGIN")),
-                                ),
-                              ],
-                            ),
-                            if (parameters.methods.any((element) =>
-                                element == AuthenticationMethod.scanQr ||
-                                element == AuthenticationMethod.otp ||
-                                element == AuthenticationMethod.push))
+                      Row(children: [
+                        if (parameters.methods
+                            .contains(AuthenticationMethod.scanQr))
+                          Column(
+                            children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                child: Row(
-                                  children: [
-                                    const Expanded(child: Divider()),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                      child: Text(
-                                        "or",
-                                        style: context.textTheme.titleMedium,
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: SvgPicture.asset(
+                                  "assets/svgs/qr.svg",
+                                  width: 196,
+                                  colorFilter: ColorFilter.mode(
+                                      parameters.brandColor, BlendMode.srcIn),
+                                ),
+                              ),
+                              Text(
+                                "SCAN",
+                                style: context.textTheme.titleLarge!
+                                    .copyWith(color: parameters.brandColor),
+                              ),
+                            ],
+                          ),
+                        if ((parameters.methods.contains(
+                                    AuthenticationMethod.emailAndPassword) ||
+                                parameters.methods
+                                    .contains(AuthenticationMethod.otp)) &&
+                            parameters.methods
+                                .contains(AuthenticationMethod.scanQr))
+                          Column(
+                            children: [
+                              const SizedBox(
+                                  height: 72, child: VerticalDivider()),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  "or",
+                                  style: context.textTheme.titleMedium,
+                                ),
+                              ),
+                              const SizedBox(
+                                  height: 72, child: VerticalDivider())
+                            ],
+                          ),
+                        if (parameters.methods.contains(
+                                AuthenticationMethod.emailAndPassword) ||
+                            parameters.methods
+                                .contains(AuthenticationMethod.otp))
+                          Expanded(
+                            child: Column(
+                              children: [
+                                if (parameters.methods.contains(
+                                        AuthenticationMethod
+                                            .emailAndPassword) ==
+                                    true)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: TextFormField(
+                                      decoration: InputDecoration(
+                                          labelText: "Email",
+                                          suffixIcon: parameters.methods
+                                                  .contains(
+                                                      AuthenticationMethod.push)
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 16),
+                                                  child: SvgPicture.asset(
+                                                    "assets/svgs/push.svg",
+                                                    colorFilter:
+                                                        ColorFilter.mode(
+                                                            parameters
+                                                                .brandColor,
+                                                            BlendMode.srcIn),
+                                                    width: 24,
+                                                  ),
+                                                )
+                                              : null),
+                                    ),
+                                  ),
+                                if (parameters.methods.contains(
+                                        AuthenticationMethod
+                                            .emailAndPassword) ==
+                                    true)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: "Password",
                                       ),
                                     ),
-                                    const Expanded(child: Divider())
-                                  ],
-                                ),
-                              ),
-                          ],
-                        ),
-                      if (parameters.methods.any((element) =>
-                          element == AuthenticationMethod.scanQr ||
-                          element == AuthenticationMethod.otp ||
-                          element == AuthenticationMethod.push))
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                if (parameters.methods
-                                    .contains(AuthenticationMethod.scanQr))
-                                  Column(
-                                    children: [
-                                      SvgPicture.asset("assets/svgs/qr.svg",
-                                          colorFilter: ColorFilter.mode(
-                                              parameters.brandColor,
-                                              BlendMode.srcIn)),
-                                      Text(
-                                        "SCAN QR",
-                                        style: context.textTheme.titleMedium!
-                                            .copyWith(
-                                                color: parameters.brandColor),
-                                      ),
-                                    ],
                                   ),
                                 if (parameters.methods
                                     .contains(AuthenticationMethod.otp))
-                                  Column(
-                                    children: [
-                                      SvgPicture.asset("assets/svgs/otp.svg",
-                                          colorFilter: ColorFilter.mode(
-                                              parameters.brandColor,
-                                              BlendMode.srcIn),
-                                          width: 60),
-                                      Text(
-                                        "OTP",
-                                        style: context.textTheme.titleMedium!
-                                            .copyWith(
-                                                color: parameters.brandColor),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: "OTP",
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                if (parameters.methods
-                                    .contains(AuthenticationMethod.push))
-                                  Column(
-                                    children: [
-                                      SvgPicture.asset(
-                                        "assets/svgs/push.svg",
-                                        colorFilter: ColorFilter.mode(
-                                            parameters.brandColor,
-                                            BlendMode.srcIn),
-                                        height: 60,
-                                      ),
-                                      Text(
-                                        "PUSH",
-                                        style: context.textTheme.titleMedium!
-                                            .copyWith(
-                                                color: parameters.brandColor),
-                                      ),
-                                    ],
-                                  ),
+                                const Row(
+                                  children: [
+                                    Expanded(
+                                      child: ElevatedButton(
+                                          onPressed: null,
+                                          child: Text("LOGIN")),
+                                    ),
+                                  ],
+                                ),
                               ],
-                            )
-                          ],
-                        )
+                            ),
+                          ),
+                      ]),
                     ],
                   ),
                 ),
