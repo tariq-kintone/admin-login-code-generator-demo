@@ -43,120 +43,129 @@ class AdminPreview extends StatelessWidget {
                           style: context.textTheme.titleLarge,
                         ),
                       ),
-                      Row(children: [
-                        if (parameters.methods
-                            .contains(AuthenticationMethod.scanQr))
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: SvgPicture.asset(
-                                  "assets/svgs/qr.svg",
-                                  width: 196,
-                                  colorFilter: ColorFilter.mode(
-                                      parameters.brandColor, BlendMode.srcIn),
-                                ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (parameters.methods
+                                .contains(AuthenticationMethod.scanQr))
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: SvgPicture.asset(
+                                      "assets/svgs/qr.svg",
+                                      width: 196,
+                                      colorFilter: ColorFilter.mode(
+                                          parameters.brandColor,
+                                          BlendMode.srcIn),
+                                    ),
+                                  ),
+                                  Text(
+                                    "SCAN",
+                                    style: context.textTheme.titleLarge!
+                                        .copyWith(color: parameters.brandColor),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "SCAN",
-                                style: context.textTheme.titleLarge!
-                                    .copyWith(color: parameters.brandColor),
+                            if ((parameters.methods.contains(
+                                        AuthenticationMethod
+                                            .emailAndPassword) ||
+                                    parameters.methods
+                                        .contains(AuthenticationMethod.otp)) &&
+                                parameters.methods
+                                    .contains(AuthenticationMethod.scanQr))
+                              Column(
+                                children: [
+                                  const SizedBox(
+                                      height: 72, child: VerticalDivider()),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Text(
+                                      "or",
+                                      style: context.textTheme.titleMedium,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      height: 72, child: VerticalDivider())
+                                ],
                               ),
-                            ],
-                          ),
-                        if ((parameters.methods.contains(
+                            if (parameters.methods.contains(
                                     AuthenticationMethod.emailAndPassword) ||
                                 parameters.methods
-                                    .contains(AuthenticationMethod.otp)) &&
-                            parameters.methods
-                                .contains(AuthenticationMethod.scanQr))
-                          Column(
-                            children: [
-                              const SizedBox(
-                                  height: 72, child: VerticalDivider()),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Text(
-                                  "or",
-                                  style: context.textTheme.titleMedium,
-                                ),
-                              ),
-                              const SizedBox(
-                                  height: 72, child: VerticalDivider())
-                            ],
-                          ),
-                        if (parameters.methods.contains(
-                                AuthenticationMethod.emailAndPassword) ||
-                            parameters.methods
-                                .contains(AuthenticationMethod.otp))
-                          Expanded(
-                            child: Column(
-                              children: [
-                                if (parameters.methods.contains(
-                                        AuthenticationMethod
-                                            .emailAndPassword) ==
-                                    true)
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 16),
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                          labelText: "Email",
-                                          suffixIcon: parameters.methods
-                                                  .contains(
-                                                      AuthenticationMethod.push)
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 16),
-                                                  child: SvgPicture.asset(
-                                                    "assets/svgs/push.svg",
-                                                    colorFilter:
-                                                        ColorFilter.mode(
-                                                            parameters
-                                                                .brandColor,
-                                                            BlendMode.srcIn),
-                                                    width: 24,
-                                                  ),
-                                                )
-                                              : null),
-                                    ),
-                                  ),
-                                if (parameters.methods.contains(
-                                        AuthenticationMethod
-                                            .emailAndPassword) ==
-                                    true)
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 16),
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        labelText: "Password",
-                                      ),
-                                    ),
-                                  ),
-                                if (parameters.methods
                                     .contains(AuthenticationMethod.otp))
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 16),
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        labelText: "OTP",
-                                      ),
-                                    ),
-                                  ),
-                                const Row(
+                              Expanded(
+                                child: Column(
                                   children: [
-                                    Expanded(
-                                      child: ElevatedButton(
-                                          onPressed: null,
-                                          child: Text("LOGIN")),
+                                    if (parameters.methods.contains(
+                                            AuthenticationMethod
+                                                .emailAndPassword) ==
+                                        true)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 16),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                              labelText: "Email",
+                                              suffixIcon: parameters.methods
+                                                      .contains(
+                                                          AuthenticationMethod
+                                                              .push)
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 16),
+                                                      child: SvgPicture.asset(
+                                                        "assets/svgs/push.svg",
+                                                        colorFilter:
+                                                            ColorFilter.mode(
+                                                                parameters
+                                                                    .brandColor,
+                                                                BlendMode
+                                                                    .srcIn),
+                                                        width: 24,
+                                                      ),
+                                                    )
+                                                  : null),
+                                        ),
+                                      ),
+                                    if (parameters.methods.contains(
+                                            AuthenticationMethod
+                                                .emailAndPassword) ==
+                                        true)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 16),
+                                        child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            labelText: "Password",
+                                          ),
+                                        ),
+                                      ),
+                                    if (parameters.methods
+                                        .contains(AuthenticationMethod.otp))
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 16),
+                                        child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            labelText: "OTP",
+                                          ),
+                                        ),
+                                      ),
+                                    const Row(
+                                      children: [
+                                        Expanded(
+                                          child: ElevatedButton(
+                                              onPressed: null,
+                                              child: Text("LOGIN")),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                      ]),
+                              ),
+                          ]),
                     ],
                   ),
                 ),

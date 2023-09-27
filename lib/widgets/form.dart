@@ -20,7 +20,6 @@ class _AdminFormState extends State<AdminForm> {
       AuthenticationMethod.values.map((e) => MapEntry(e, true)));
   late Color? _customColor;
   late FormParameters _params;
-  var _loading = false;
 
   @override
   void initState() {
@@ -133,11 +132,8 @@ class _AdminFormState extends State<AdminForm> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: _loading ? null : _onGenerate,
-                      child: _loading
-                          ? const SizedBox.square(
-                              dimension: 24, child: CircularProgressIndicator())
-                          : const Text("GENERATE")),
+                      onPressed: _onGenerate,
+                      child: const Text("GENERATE")),
                 ),
               ],
             )
@@ -181,16 +177,8 @@ class _AdminFormState extends State<AdminForm> {
   }
 
   void _onGenerate() {
-    setState(() {
-      _loading = true;
-    });
-    Future.delayed(const Duration(milliseconds: 2000), () {
-      setState(() {
-        _loading = false;
-      });
-      Navigator.of(context)
-          .pushNamed("/generated");
-    });
+    Navigator.of(context)
+        .pushNamed("/generated",arguments: _params);
   }
 
   void _onTitleChanged() {

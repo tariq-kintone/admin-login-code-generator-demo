@@ -1,3 +1,4 @@
+import 'package:admin_login_code_generator/models/form_parameters.dart';
 import 'package:admin_login_code_generator/pages/code_copy.dart';
 import 'package:admin_login_code_generator/pages/form_generator.dart';
 import 'package:admin_login_code_generator/theme.dart';
@@ -18,9 +19,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Admin Demo',
       theme: buildTheme(colorScheme: colorScheme),
-      routes: {
-        "/": (context) => FormGeneratorPage(),
-        "/generated": (context) => CodeCopyPage(),
+      initialRoute: "/",
+      onGenerateRoute: (settings) {
+        if (settings.name == "/generated") {
+          final args = settings.arguments as FormParameters?;
+          return MaterialPageRoute(
+              builder: (context) => CodeCopyPage(parameters: args));
+        } else {
+          return MaterialPageRoute(
+              builder: (context) => const FormGeneratorPage());
+        }
       },
     );
   }

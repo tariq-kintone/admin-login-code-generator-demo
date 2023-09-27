@@ -7,7 +7,9 @@ class FormParameters {
   final List<AuthenticationMethod> methods;
 
   const FormParameters(
-      {required this.title, required this.brandColor, required this.methods});
+      {this.title = "Login",
+      this.brandColor = const Color(0xFF6640B4),
+      this.methods = AuthenticationMethod.values});
 
   FormParameters copyWith(
       {String? title, Color? brandColor, List<AuthenticationMethod>? methods}) {

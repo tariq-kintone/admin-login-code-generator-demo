@@ -1,8 +1,15 @@
+import 'package:admin_login_code_generator/models/form_parameters.dart';
 import 'package:admin_login_code_generator/pages/code_text_field.dart';
+import 'package:admin_login_code_generator/templates/css.dart';
+import 'package:admin_login_code_generator/templates/html.dart';
 import 'package:flutter/material.dart';
 
 class CodeCopyPage extends StatelessWidget {
-  const CodeCopyPage({Key? key}) : super(key: key);
+  const CodeCopyPage({Key? key, FormParameters? parameters})
+      : parameters = parameters ?? const FormParameters(),
+        super(key: key);
+
+  final FormParameters parameters;
 
   @override
   Widget build(BuildContext context) {
@@ -10,19 +17,26 @@ class CodeCopyPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Form Generated"),
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 32),
-              child: CodeTextField(code: css, labelText: "CSS"),
+              padding: const EdgeInsets.only(bottom: 32),
+              child: CodeTextField(
+                  code: buildCss(brandColor: parameters.brandColor),
+                  labelText: "CSS"),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 32),
-              child: CodeTextField(code: html, labelText: "HTML"),
+              padding: const EdgeInsets.only(bottom: 32),
+              child: CodeTextField(
+                  code: buildHtml(
+                      brandColor: parameters.brandColor,
+                      title: parameters.title,
+                      methods: parameters.methods),
+                  labelText: "HTML"),
             ),
-            CodeTextField(code: js, labelText: "JAVASCRIPT")
+            const CodeTextField(code: js, labelText: "JAVASCRIPT")
           ],
         ),
       ),
